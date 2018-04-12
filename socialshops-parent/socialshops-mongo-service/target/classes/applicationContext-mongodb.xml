@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mongo="http://www.springframework.org/schema/data/mongo" xsi:schemaLocation="http://www.springframework.org/schema/context
+          http://www.springframework.org/schema/context/spring-context-3.0.xsd   
+          http://www.springframework.org/schema/data/mongo   
+          http://www.springframework.org/schema/data/mongo/spring-mongo-1.0.xsd   
+          http://www.springframework.org/schema/beans   
+          http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+
+    <!--第一个用户库的配置 -->
+    <!-- <mongo:mongo id="mongoConnection0001" host="127.0.0.1" port="27017">
+        <mongo:options
+                connections-per-host="10"
+                threads-allowed-to-block-for-connection-multiplier="4"
+                connect-timeout="1000"
+                max-wait-time="1500"
+                auto-connect-retry="true"
+                socket-keep-alive="true"
+                socket-timeout="1500"
+                slave-ok="true"
+                write-number="1"
+                write-timeout="0"
+                write-fsync="true"/>
+    </mongo:mongo> -->
+    <!-- 引入mongodb.properties属性文件 -->
+	<context:property-placeholder location="classpath:mongodb.properties" ignore-unresolvable="true" />
+    <!--第一个用户库的配置 -->
+    <mongo:mongo id="mongoConnection0001" host="${mongoDb0001.host}" port="${mongoDb0001.port}">
+        <mongo:options
+                connections-per-host="${mongoDb0001.connectionsPerHost}"
+                threads-allowed-to-block-for-connection-multiplier="4"
+                connect-timeout="${mongoDb0001.connectTimeout}"
+                max-wait-time="${mongoDb0001.maxWaitTime}"
+                auto-connect-retry="${mongoDb0001.autoConnectRetry}"
+                socket-keep-alive="${mongoDb0001.socketKeepAlive}"
+                socket-timeout="${mongoDb0001.socketTimeout}"
+                slave-ok="true"
+                write-number="1"
+                write-timeout="0"
+                write-fsync="true"/>
+    </mongo:mongo>
+
+    <mongo:db-factory id="dbMongoDbFactory0001" dbname="local" mongo-ref="mongoConnection0001"/>
+
+    <bean id="mongoTemplate0001" class="org.springframework.data.mongodb.core.MongoTemplate">
+        <constructor-arg name="mongoDbFactory" ref="dbMongoDbFactory0001"/>
+    </bean>
+
+    <bean id="mongoDsMap" class="java.util.HashMap">
+        <constructor-arg>
+            <map>
+                <entry key="0001" value-ref="mongoTemplate0001"></entry>
+            </map>
+        </constructor-arg>
+    </bean>
+
+</beans>
