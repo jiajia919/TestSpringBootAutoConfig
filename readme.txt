@@ -1,2 +1,4 @@
-Git is a version control system.
-Git is free software.
+sbautoconfigtest is real SpringBoot Program!!!!
+
+
+sbTest is a jar...
