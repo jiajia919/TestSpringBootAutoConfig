@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Class-Path: libs/spring-jcl-5.0.5.RELEASE.jar libs/spring-beans-5.0.5.
+ RELEASE.jar libs/spring-context-5.0.5.RELEASE.jar libs/spring-core-5.
+ 0.5.RELEASE.jar libs/spring-boot-autoconfigure-2.0.1.RELEASE.jar libs
+ /spring-aop-5.0.5.RELEASE.jar libs/spring-boot-2.0.1.RELEASE.jar libs
+ /spring-expression-5.0.5.RELEASE.jar
+Main-Class: Main.Main
+
